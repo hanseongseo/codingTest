@@ -19,21 +19,24 @@ public class Main03 {
             this.choice = choice;
         }
 
-        public String rockPaperScissors(Player B) {
+        public List<String> rockPaperScissors(Player B) {
+            List<String> result = new ArrayList<>();
             for (int i = 0; i < this.choice.size(); i++) {
-                int AChoice = this.choice.iterator().next();
-                int BChoice = B.choice.iterator().next();
+                int AChoice = this.choice.get(i);
+                int BChoice = B.choice.get(i);
                 if (Objects.equals(AChoice, BChoice)) {
-                    return "D";
+                    result.add("D");
                 } else if (
                         (AChoice == 1 && BChoice == 3) ||
                                 (AChoice == 2 && BChoice == 1) ||
                                 (AChoice == 3 && BChoice == 2)
                 ) {
-                    return this.id;
+                    result.add(this.id);
+                } else {
+                    result.add(B.id);
                 }
             }
-            return B.id;
+            return result;
         }
     }
 
@@ -52,14 +55,10 @@ public class Main03 {
         for (int i = 0; i < count; i++) {
             B.choice.add(Integer.valueOf(stringTokenizer.nextToken()));
         }
-
-        System.out.println(A.choice);
-        System.out.println(B.choice);
-        for (int i = 0; i < count; i++) {
-            System.out.println(A.rockPaperScissors(B));
+        List<String> result = A.rockPaperScissors(B);
+        for (String s : result) {
+            System.out.println(s);
         }
-
-
     }
 
 }
