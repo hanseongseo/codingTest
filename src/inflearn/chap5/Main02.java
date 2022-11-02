@@ -25,16 +25,28 @@ public class Main02 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String input = bufferedReader.readLine();
+
+        System.out.println(removeBracketWords(input));
     }
 
     public static String removeBracketWords(String input) {
+        StringBuilder result = new StringBuilder();
         Stack<Character> characterStack = new Stack<>();
         for (char x : input.toCharArray()) {
-            if (characterStack.isEmpty()) {
-                if (x == '(') characterStack.push(x);
+            char tmp = 0;
+            if (x == ')') {
+                while (tmp != '(') {
+                    tmp = characterStack.pop();
+                }
+            } else {
+                characterStack.push(x);
             }
         }
-        return null;
+
+        for (char x : characterStack) {
+            result.append(x);
+        }
+        return result.toString();
     }
 }
 
